@@ -1,44 +1,37 @@
 import React from "react"
 import {useState} from "react"
 
+const App =  (props)=> {
 
 
+  const [name,setName] = useState(props.name)
+  const [price,setPrice] = useState(props.price)
 
-
-const App =  ()=> {
-
-// useState 配列を返す320は初期値
-// 2つの値を返す(配列で)、一つは初期値、二つ目は関数(setCount)]
-const [count,setCount] =  useState(0)
-
-const incriment = () => setCount(count + 1)
-const decriment = () => setCount(count - 1)
-
-// setCount に関数を持たせることもできる
-const incriment2 = () => setCount(previoud =>  previoud + 2)
-const Reset = () => setCount(0)
-const Double = () => setCount(previoud =>  previoud *2)
-const threeCount =  count % 3 === 0  ? count / 3 : count;
-
+  const reset = () =>{
+    setPrice(props.price)
+    setName(props.name)
+  }
 
 return (
-    <>
-    {threeCount}
-     <br/>
-     <button onClick={incriment}>+1</button>
-     <br/>
-     <button onClick={decriment}>-1</button>
-     <br/>
-     <button onClick={incriment2}>+2</button>
-     <br/>
-     <button onClick={Reset}>reset</button>
-     <br/>
-     <button onClick={Double}>*2</button>
-     <br/>
-     <button onClick={threeCount}>3/</button>
+<>
+<p>現在の{name}は、{price}円です</p>
+<button onClick={()=>setPrice(price + 1)}>+1</button>
+<br/>
+<button onClick={()=>setPrice(price - 1)}>-1</button>
+<br/>
 
+<button onClick={reset}>Reset</button>
+<br/>
+
+<input type="text" value={name}  onChange={ (e) => setName(e.target.value) }/>
      </>
   );
 }
+
+App.defaultProps = {
+  name:"サンプル",
+  price:1000
+}
+//https://qiita.com/pepo/items/fa68fdc3c79e006adef6
 
 export default App;
