@@ -1,5 +1,5 @@
 import React from "react"
-import {useState} from "react"
+import {useEffect,useState} from "react"
 
 const App = (props)=> {
 
@@ -8,6 +8,20 @@ const App = (props)=> {
  
   // こっちは分割代入
   const {name,price} = state
+  
+  // useEffect is invoked 初回＋レンダリング時に毎回呼ばれる
+  useEffect(()=>{
+    console.log("useEffect is invoked")
+  })
+  // []これだけだとレンダリングされても呼ばれない
+  useEffect(()=>{
+    console.log("useEffect is invoked_2")
+  },[])
+// name 要素が変更されたら、に限定してみる
+  useEffect(()=>{
+    console.log("This callback is for name only")
+  },[name])
+
   
 
 return (
